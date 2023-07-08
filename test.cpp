@@ -5,10 +5,10 @@ using namespace std;
 
 void Date_tests() {
     {Date d = Date();
-    cout << d.str() << '\n';} // TODO: Manual test
+    cout << "Manual test | Local Time: "<< d.str() << '\n';} // TODO: Manual test
 
     {Date d = Date(0);
-    assert(d.str() == "Thu Jan  1 01:00:00 1970");
+    assert(d.str() == "Thu Jan  1 00:00:00 1970\n");
     }
 }
 
