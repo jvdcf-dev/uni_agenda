@@ -1,19 +1,22 @@
 #ifndef DATE_H
 #define DATE_H
-#include <ctime>
+#include <chrono>
 #include <string>
 
 class Date {
     public:
-        Date(); // Assume current UTC time
-        Date(time_t seconds); // Number of seconds since 1/1/1900
-        Date(unsigned year, unsigned month, unsigned day); // Assume hour = 0, minute = 0 and second = 0
-        time_t operator-(const Date& d);
-        time_t seconds() const;
+        Date(); // Assume current time
+        Date(unsigned year, unsigned month, unsigned day, unsigned hour, unsigned minute, unsigned second);
+
+        std::chrono::duration<int> operator-(const Date& d);
+        std::chrono::duration<int> seconds() const;
+        std::chrono::year_month_day ymd() const;
+        //std::chrono::hh_mm_ss hms() const;
+
         std::string str() const;
 
     private:
-        tm* gmtime_;
+        std::chrono::time_point<std::chrono::system_clock> time_;
 };
 
 #endif

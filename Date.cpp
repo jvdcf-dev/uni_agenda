@@ -1,43 +1,34 @@
 #include "Date.hpp"
-#include <ctime>
-#include <iostream>
-#include <string>
-using namespace std;
+#include <chrono>
+#include <sstream>
+using namespace std::chrono;
 
 Date::Date() {
-    time_t current_time = time(0);
-    gmtime_ = gmtime(&current_time);
+    time_ = system_clock::now();
 }
 
-Date::Date(time_t seconds) {
-    time_t current_time = seconds;
-    gmtime_ = gmtime(&current_time);
+Date::Date(unsigned year = 0, unsigned month = 1, unsigned day = 1, unsigned hour = 0, unsigned minute = 0, unsigned second = 0) {
+    
 }
 
-Date::Date(unsigned year, unsigned month, unsigned day) {
-    gmtime_ = {};
-    gmtime_->tm_sec = 0;
-    gmtime_->tm_min = 0;
-    gmtime_->tm_hour = 0;
-    gmtime_->tm_mday = day;
-    gmtime_->tm_mon = month - 1;
-    gmtime_->tm_year = year - 1900;
-    //gmtime_->tm_wday
-    //gmtime_->tm_yday
-    //gmtime_->tm_isdst
+std::chrono::duration<int> Date::operator-(const Date &d) {
+    return std::chrono::duration<int>();
 }
 
-time_t Date::operator-(const Date &d) {
-    time_t left = mktime(gmtime_);
-    time_t right = mktime(d.gmtime_);
-    return left - right;
+std::chrono::duration<int> Date::seconds() const {
+    return std::chrono::duration<int>();
 }
 
-time_t Date::seconds() const {
-    return mktime(gmtime_);
+std::chrono::year_month_day Date::ymd() const {
+    auto days = floor<duration<int, std::ratio_multiply<hours::period, std::ratio<24>>>>(time_);
+    year_month_day ymd{days};
+    return ymd;
 }
 
-string Date::str() const {
-    time_t seconds = mktime(gmtime_);
-    return ctime(&seconds);
+// auto hours = time_ - days;
+// hh_mm_ss hms{hours};
+
+std::string Date::str() const {
+    time_t time_point = system_clock::to_time_t(time_);
+    return ctime(&time_point);
 }

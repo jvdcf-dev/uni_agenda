@@ -1,15 +1,13 @@
 #include "Date.hpp"
 #include <iostream>
+#include <chrono>
 #include <cassert>
 using namespace std;
 
 void Date_tests() {
     {Date d = Date();
-    cout << "Manual test | Local Time: "<< d.str() << '\n';} // TODO: Manual test
-
-    {Date d = Date(0);
-    assert(d.str() == "Thu Jan  1 00:00:00 1970\n");
-    }
+    time_t t = time(0);
+    assert(ctime(&t) == d.str());}
 }
 
 int main() {
