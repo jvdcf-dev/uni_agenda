@@ -6,17 +6,16 @@
 class Date {
     public:
         Date(); // Assume current time
-        Date(unsigned year, unsigned month, unsigned day, unsigned hour, unsigned minute, unsigned second);
+        Date(int year, int month, int day, int hour, int minute, int second);
 
-        std::chrono::duration<int> operator-(const Date& d);
-        std::chrono::duration<int> seconds() const;
+        std::chrono::duration<int64_t> operator-(const Date& d);    // Number of seconds
         std::chrono::year_month_day ymd() const;
-        //std::chrono::hh_mm_ss hms() const;
+        std::chrono::hh_mm_ss<std::chrono::duration<int64_t>> hms() const;
 
         std::string str() const;
 
     private:
-        std::chrono::time_point<std::chrono::system_clock> time_;
+        std::chrono::system_clock::time_point time_;
 };
 
 #endif

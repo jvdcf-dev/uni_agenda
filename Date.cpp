@@ -7,26 +7,31 @@ Date::Date() {
     time_ = system_clock::now();
 }
 
-Date::Date(unsigned year = 0, unsigned month = 1, unsigned day = 1, unsigned hour = 0, unsigned minute = 0, unsigned second = 0) {
-    
+Date::Date(int year = 1900, int month = 1, int day = 1, int hour = 0, int minute = 0, int second = 0) {
+    if (year < 1754) throw "Invalid date";
+    std::tm point_in_time = {second, minute, hour, day, month - 1, year - 1900};
+    point_in_time.tm_isdst = -1;
+    time_ = system_clock::from_time_t(std::mktime(&point_in_time));
 }
 
-std::chrono::duration<int> Date::operator-(const Date &d) {
-    return std::chrono::duration<int>();
+duration<int64_t> Date::operator-(const Date &d) {
+    auto duration = time_.time_since_epoch() - d.time_.time_since_epoch();
+    return round<seconds>(duration);
 }
 
-std::chrono::duration<int> Date::seconds() const {
-    return std::chrono::duration<int>();
-}
-
-std::chrono::year_month_day Date::ymd() const {
+year_month_day Date::ymd() const {
     auto days = floor<duration<int, std::ratio_multiply<hours::period, std::ratio<24>>>>(time_);
     year_month_day ymd{days};
     return ymd;
 }
 
-// auto hours = time_ - days;
-// hh_mm_ss hms{hours};
+hh_mm_ss<duration<int64_t>> Date::hms() const {
+    auto days = floor<duration<int, std::ratio_multiply<hours::period, std::ratio<24>>>>(time_);
+    auto hours = time_ - days;
+    auto rounded_hours = round<seconds>(hours);
+    hh_mm_ss hms{rounded_hours};
+    return hms;
+}
 
 std::string Date::str() const {
     time_t time_point = system_clock::to_time_t(time_);
