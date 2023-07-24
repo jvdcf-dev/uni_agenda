@@ -1,6 +1,13 @@
 #include "Date.hpp"
+#include "Time.hpp"
+#include "Assessment.hpp"
+#include "Task.hpp"
+#include "Summary.hpp"
+#include "Subject.hpp"
+#include "Semester.hpp"
+#include "Course.hpp"
+
 #include <iostream>
-#include <chrono>
 #include <cassert>
 using namespace std;
 
@@ -34,12 +41,26 @@ void Date_tests() {
     assert(hms.hours() == std::chrono::hours(15));}
 }
 
+void time_tests() {}
+void assessment_tests() {}
+void task_tests() {}
+void summary_tests() {}
+void subject_tests() {}
+void semester_tests() {}
+void course_tests() {}
 
-void Temporary() {
-}
+void Temporary() {}
+
 
 int main() {
     Date_tests();
+    time_tests();
+    assessment_tests();
+    task_tests();
+    summary_tests();
+    subject_tests();
+    semester_tests();
+    course_tests();
     Temporary();
     return 0;
 }
