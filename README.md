@@ -7,6 +7,8 @@ A CLI interface for managing tasks, exams and deadlines in university
   - **Semestre** (V)
     - Ano
     - Semestre
+    - Data inicial
+    - Data final
     - **Cadeira** (V)
       - Nome
       - Sigla
