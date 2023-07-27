@@ -12,6 +12,7 @@ class Assessment {
         float get_weight() const;
         std::chrono::year_month_day get_date() const;
         float get_grade() const;
+        
         void set_name(std::string const name);
         void set_weight(float weight);
         void set_date(int year, int month, int day);
@@ -19,9 +20,9 @@ class Assessment {
 
     private:
         std::string name_;
-        float weight_;
+        float weight_;      // 0.0 to 1.0
         Date date_;
-        float grade_;
+        float grade_;       // 0.0 to 20.0
 };
 
 #endif

@@ -9,7 +9,7 @@
 
 class Subject {
     public:
-        // Constructors (no desctructors necessary)
+        // Constructors (no destructors necessary)
         Subject();
         Subject(std::string name, std::string acronym, std::string code, float credits);
 
