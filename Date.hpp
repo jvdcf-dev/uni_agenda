@@ -5,14 +5,17 @@
 
 class Date {
     public:
-        Date(); // Assume current time
+        Date();     // Sets the date to the current date and time
         Date(int year, int month, int day, int hour, int minute, int second);
 
-        std::chrono::duration<int64_t> operator-(const Date& d);    // Number of seconds
-        std::chrono::year_month_day ymd() const;
-        std::chrono::hh_mm_ss<std::chrono::duration<int64_t>> hms() const;
+        std::chrono::duration<int64_t> operator-(const Date& d);    // Returns the difference in seconds
+        std::chrono::year_month_day get_ymd() const;
+        std::chrono::hh_mm_ss<std::chrono::duration<int64_t>> get_hms() const;
+        int get_weekday() const;    // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+        void set_ymd(int year, int month, int day); 
+        void set_hms(int hour, int minute, int second); 
 
-        std::string str() const;
+        std::string str() const;    // Returns a string in the format "Week Mon Day HH:MM:SS Year\n"
 
     private:
         std::chrono::system_clock::time_point time_;
