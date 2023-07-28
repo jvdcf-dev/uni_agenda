@@ -19,13 +19,36 @@ duration<int64_t> Date::operator-(const Date &d) {
     return round<seconds>(duration);
 }
 
-year_month_day Date::ymd() const {
+year_month_day Date::get_ymd() const {
     auto days = floor<duration<int, std::ratio_multiply<hours::period, std::ratio<24>>>>(time_);
     year_month_day ymd{days};
     return ymd;
 }
 
-hh_mm_ss<duration<int64_t>> Date::hms() const {
+int Date::get_weekday() const {
+    time_t time_t = system_clock::to_time_t(time_);
+    std::tm tm = *std::localtime(&time_t);
+    return tm.tm_wday;
+}
+
+void Date::set_ymd(int year, int month, int day) {
+    if (year < 1754) throw "Invalid date";
+    time_t time_t = system_clock::to_time_t(time_);
+    std::tm old_tm = *std::localtime(&time_t);
+    std::tm new_tm = {old_tm.tm_sec, old_tm.tm_min, old_tm.tm_hour, day, month - 1, year - 1900};
+    time_t = std::mktime(&new_tm);
+    time_ = system_clock::from_time_t(time_t);
+}
+
+void Date::set_hms(int hour, int minute, int second) {
+    time_t time_t = system_clock::to_time_t(time_);
+    std::tm old_tm = *std::localtime(&time_t);
+    std::tm new_tm = {second, minute, hour, old_tm.tm_mday, old_tm.tm_mon, old_tm.tm_year};
+    time_t = std::mktime(&new_tm);
+    time_ = system_clock::from_time_t(time_t);
+}
+
+hh_mm_ss<duration<int64_t>> Date::get_hms() const {
     auto days = floor<duration<int, std::ratio_multiply<hours::period, std::ratio<24>>>>(time_);
     auto hours = time_ - days;
     auto rounded_hours = round<seconds>(hours);

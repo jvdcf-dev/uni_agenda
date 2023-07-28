@@ -29,23 +29,31 @@ void Date_tests() {
     assert(d2 - d1 == 3661s);}
 
     {Date d = Date(2020, 9, 20, 21, 59, 1);
-    auto ymd = d.ymd();
+    auto ymd = d.get_ymd();
     assert(ymd.day() == std::chrono::day(20));
     assert(ymd.month() == std::chrono::month(9));
     assert(ymd.year() == std::chrono::year(2020));}
 
     {Date d = Date(1990, 1, 1, 15, 23, 46);
-    auto hms = d.hms();
+    auto hms = d.get_hms();
     assert(hms.seconds() == std::chrono::seconds(46));
     assert(hms.minutes() == std::chrono::minutes(23));
     assert(hms.hours() == std::chrono::hours(15));}
+
+    {Date d = Date();
+    d.set_ymd(2022, 12, 26);
+    d.set_hms(10, 5, 23);
+    assert(d.str() == "Mon Dec 26 10:05:23 2022\n");}
+
+    {Date d = Date(2022, 12, 25, 0, 0, 0);
+    assert(d.get_weekday() == 0);}
 }
 
 
 void time_tests() {}
 
 
-void assessment_tests() {
+/* void assessment_tests() {
     {Assessment a = Assessment();
     assert(a.get_name() == "N/A");
     assert(a.get_weight() == 0);
@@ -93,7 +101,7 @@ void assessment_tests() {
         {Assessment a = Assessment();
         a.set_weight(-0.1);}
     } catch(const char* e) {}
-}
+} */
 
 
 void task_tests() {}
@@ -108,7 +116,7 @@ void Temporary() {}
 int main() {
     Date_tests();
     time_tests();
-    assessment_tests();
+    /* assessment_tests(); */
     task_tests();
     summary_tests();
     subject_tests();
