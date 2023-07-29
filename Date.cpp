@@ -1,6 +1,7 @@
 #include "Date.hpp"
 #include <chrono>
 #include <sstream>
+#include <stdexcept>
 using namespace std::chrono;
 
 Date::Date() {
@@ -8,7 +9,7 @@ Date::Date() {
 }
 
 Date::Date(int year = 1900, int month = 1, int day = 1, int hour = 0, int minute = 0, int second = 0) {
-    if (year < 1754) throw "Invalid date";
+    if (year < 1754) throw std::runtime_error("Invalid date");
     std::tm point_in_time = {second, minute, hour, day, month - 1, year - 1900};
     point_in_time.tm_isdst = -1;
     time_ = system_clock::from_time_t(std::mktime(&point_in_time));
@@ -32,7 +33,7 @@ int Date::get_weekday() const {
 }
 
 void Date::set_ymd(int year, int month, int day) {
-    if (year < 1754) throw "Invalid date";
+    if (year < 1754) throw std::runtime_error("Invalid date");
     time_t time_t = system_clock::to_time_t(time_);
     std::tm old_tm = *std::localtime(&time_t);
     std::tm new_tm = {old_tm.tm_sec, old_tm.tm_min, old_tm.tm_hour, day, month - 1, year - 1900};

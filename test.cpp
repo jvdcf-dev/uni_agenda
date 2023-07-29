@@ -7,9 +7,10 @@
 #include "Semester.hpp"
 #include "Course.hpp"
 
-#include <iostream>
+#include <iostream>    
 #include <cassert>
-#include <unistd.h>
+#include <unistd.h>     // sleep() for Unix machines (use <windows.h> for Windows machines)
+#include <stdexcept>
 using namespace std;
 
 void Date_tests() {
@@ -23,7 +24,7 @@ void Date_tests() {
     try {
         {Date d = Date(1753, 0, 1, 48, 0, 0);
         cout << d.str();}
-    } catch(const char* e) {}
+    } catch(const std::exception& e) {}
 
     {Date d1 = Date(1900, 1, 1, 0, 0, 0);
     Date d2 = Date(1900, 1, 1, 1, 1, 1);
@@ -147,25 +148,25 @@ void assessment_tests() {
         {Assessment a = Assessment();
         a.set_grade(-13.4);
         cout << a.get_grade();}
-    } catch(const char* e) {}
+    } catch(const std::exception& e) {}
 
     try {
         {Assessment a = Assessment();
         a.set_weight(1.2);
         cout << a.get_weight();}
-    } catch(const char* e) {}
+    } catch(const std::exception& e) {}
 
     try {
         {Assessment a = Assessment();
         a.set_grade(23.25);
         cout << a.get_grade();}
-    } catch(const char* e) {}
+    } catch(const std::exception& e) {}
 
     try {
         {Assessment a = Assessment();
         a.set_weight(-0.1);
         cout << a.get_weight();}
-    } catch(const char* e) {}
+    } catch(const std::exception& e) {}
 }
 
 

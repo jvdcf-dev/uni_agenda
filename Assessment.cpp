@@ -1,5 +1,6 @@
 #include "Assessment.hpp"
 #include <string>
+#include <stdexcept>
 using namespace std;
 
 Assessment::Assessment() {
@@ -11,10 +12,10 @@ Assessment::Assessment() {
 
 Assessment::Assessment(std::string name, float weight, int year, int month, int day, float grade) {
     if (weight < 0 or weight > 1) {
-        throw "Invalid weight";
+        throw std::runtime_error("Invalid weight: 0 <= weight <= 1");
     }
     if (grade < 0 or grade > 20) {
-        throw "Invalid grade";
+        throw std::runtime_error("Invalid grade: 0 <= grade <= 20");
     }
     date_ = Date(year, month, day, 1, 1, 1);
     name_ = name;
@@ -44,7 +45,7 @@ void Assessment::set_name(std::string const name) {
 
 void Assessment::set_weight(float weight) {
     if (weight < 0 or weight > 1) {
-        throw "Invalid weight";
+        throw std::runtime_error("Invalid weight: 0 <= weight <= 1");
     }
     weight_ = weight;
 }
@@ -55,7 +56,7 @@ void Assessment::set_date(int year, int month, int day) {
 
 void Assessment::set_grade(float grade) {
     if (grade < 0 or grade > 20) {
-        throw "Invalid grade";
+        throw std::runtime_error("Invalid grade: 0 <= grade <= 20");
     }
     grade_ = grade;
 }
