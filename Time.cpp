@@ -1,4 +1,6 @@
 #include "Time.hpp"
+#include <stdexcept>
+#include <chrono>
 using namespace std::chrono;
 
 Time::Time() {
