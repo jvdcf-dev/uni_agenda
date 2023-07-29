@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <cassert>
+#include <unistd.h>
 using namespace std;
 
 void Date_tests() {
@@ -50,7 +51,67 @@ void Date_tests() {
 }
 
 
-void time_tests() {}
+void time_tests() {
+    {Time t = Time();
+    assert(t.get_time() == 0s);
+    assert(t.get_hms().hours() == 0h);
+    assert(t.get_hms().minutes() == 0min);
+    assert(t.get_hms().seconds() == 0s);
+    assert(t.is_running() == false);}
+
+    {Time t = Time(1, 2, 3);
+    assert(t.get_time() == 3723s);
+    assert(t.get_hms().hours() == 1h);
+    assert(t.get_hms().minutes() == 2min);
+    assert(t.get_hms().seconds() == 3s);
+    assert(t.is_running() == false);}
+
+    {Time t = Time();
+    t.start_clock();
+    assert(t.is_running() == true);
+    sleep(1);
+    t.end_clock();
+    assert(t.is_running() == false);
+    assert(t.get_time() == 1s);}
+
+    {Time t = Time();
+    t.start_clock();
+    assert(t.is_running() == true);
+    sleep(1);
+    t.reject_clock();
+    assert(t.is_running() == false);
+    assert(t.get_time() == 0s);}
+
+    {Time t = Time();
+    t.start_clock();
+    assert(t.is_running() == true);
+    sleep(1);
+    t.end_clock();
+    assert(t.is_running() == false);
+    assert(t.get_time() == 1s);
+    t.start_clock();
+    assert(t.is_running() == true);
+    sleep(1);
+    t.reject_clock();
+    assert(t.is_running() == false);
+    assert(t.get_time() == 1s);}
+
+    try {
+        {Time t = Time();
+        t.start_clock();
+        t.start_clock();}
+    } catch(const std::exception& e) {}
+
+    try {
+        {Time t = Time();
+        t.end_clock();}
+    } catch(const std::exception& e) {}
+
+    try {
+        {Time t = Time();
+        t.reject_clock();}
+    } catch(const std::exception& e) {}
+}
 
 
 void assessment_tests() {
@@ -114,7 +175,8 @@ void subject_tests() {}
 void semester_tests() {}
 void course_tests() {}
 
-void Temporary() {}
+void Temporary() {
+}
 
 
 int main() {

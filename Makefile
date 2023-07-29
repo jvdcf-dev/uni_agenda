@@ -5,8 +5,8 @@ COMPILER=g++
 FLAGS=-std=c++20 -pedantic -Wall -Wuninitialized -Werror -g -lm -fsanitize=address -fsanitize=undefined
 
 # Files and Headers used in all programs
-FILES=Date.cpp Assessment.cpp # Time.cpp Task.cpp Summary.cpp Subject.cpp Semester.cpp Course.cpp
-HEADERS=Date.hpp Assessment.hpp # Time.hpp Task.hpp Summary.hpp Subject.hpp Semester.hpp Course.hpp
+FILES=Date.cpp Assessment.cpp Time.cpp #Task.cpp Summary.cpp Subject.cpp Semester.cpp Course.cpp
+HEADERS=Date.hpp Assessment.hpp Time.hpp #Task.hpp Summary.hpp Subject.hpp Semester.hpp Course.hpp
 
 # Compilated programs
 PROGRAMS=test #TODO
