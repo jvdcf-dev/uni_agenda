@@ -1,16 +1,16 @@
 #ifndef ASSESSMENT_H
 #define ASSESSMENT_H
-#include <string>
 #include "Date.hpp"
+#include <string>
 
 class Assessment {
     public:
         Assessment();
-        Assessment(std::string name, float weight, int year, int month, int day, float grade_);
+        Assessment(std::string name, float weight, int year, int month, int day, float grade);
 
         std::string get_name() const;
         float get_weight() const;
-        std::chrono::year_month_day get_date() const;
+        Date get_date() const;
         float get_grade() const;
         
         void set_name(std::string const name);

@@ -53,22 +53,22 @@ void Date_tests() {
 void time_tests() {}
 
 
-/* void assessment_tests() {
+void assessment_tests() {
     {Assessment a = Assessment();
     assert(a.get_name() == "N/A");
     assert(a.get_weight() == 0);
-    assert(a.get_date().year() == std::chrono::year(1900));
-    assert(a.get_date().month() == std::chrono::month(1));
-    assert(a.get_date().day() == std::chrono::day(1));
+    assert(a.get_date().get_ymd().year() == std::chrono::year(1900));
+    assert(a.get_date().get_ymd().month() == std::chrono::month(1));
+    assert(a.get_date().get_ymd().day() == std::chrono::day(1));
     assert(a.get_grade() == 0);}
 
     {Assessment a = Assessment("Test", 0.5, 2020, 9, 20, 15.2);
     assert(a.get_name() == "Test");
-    assert(a.get_weight() == 0.5);
-    assert(a.get_date().year() == std::chrono::year(2020));
-    assert(a.get_date().month() == std::chrono::month(9));
-    assert(a.get_date().day() == std::chrono::day(20));
-    assert(a.get_grade() == 15.2);}
+    assert(a.get_weight() == (float)0.5);
+    assert(a.get_date().get_ymd().year() == std::chrono::year(2020));
+    assert(a.get_date().get_ymd().month() == std::chrono::month(9));
+    assert(a.get_date().get_ymd().day() == std::chrono::day(20));
+    assert(a.get_grade() == (float)15.2);}
 
     {Assessment a = Assessment("Another test", 0.9, 2020, 11, 23, 18.4);
     a.set_name("Just a test");
@@ -76,32 +76,36 @@ void time_tests() {}
     a.set_date(2022, 12, 26);
     a.set_grade(17.5);
     assert(a.get_name() == "Just a test");
-    assert(a.get_weight() == 0.4);
-    assert(a.get_date().year() == std::chrono::year(2022));
-    assert(a.get_date().month() == std::chrono::month(12));
-    assert(a.get_date().day() == std::chrono::day(26));
-    assert(a.get_grade() == 17.5);}
+    assert(a.get_weight() == (float)0.4);
+    assert(a.get_date().get_ymd().year() == std::chrono::year(2022));
+    assert(a.get_date().get_ymd().month() == std::chrono::month(12));
+    assert(a.get_date().get_ymd().day() == std::chrono::day(26));
+    assert(a.get_grade() == (float)17.5);}
 
     try {
         {Assessment a = Assessment();
-        a.set_grade(-13.4);}
+        a.set_grade(-13.4);
+        cout << a.get_grade();}
     } catch(const char* e) {}
 
     try {
         {Assessment a = Assessment();
-        a.set_weight(1.2);}
+        a.set_weight(1.2);
+        cout << a.get_weight();}
     } catch(const char* e) {}
 
     try {
         {Assessment a = Assessment();
-        a.set_grade(23.25);}
+        a.set_grade(23.25);
+        cout << a.get_grade();}
     } catch(const char* e) {}
 
     try {
         {Assessment a = Assessment();
-        a.set_weight(-0.1);}
+        a.set_weight(-0.1);
+        cout << a.get_weight();}
     } catch(const char* e) {}
-} */
+}
 
 
 void task_tests() {}
@@ -116,7 +120,7 @@ void Temporary() {}
 int main() {
     Date_tests();
     time_tests();
-    /* assessment_tests(); */
+    assessment_tests();
     task_tests();
     summary_tests();
     subject_tests();
