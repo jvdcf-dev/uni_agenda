@@ -20,6 +20,22 @@ duration<int64_t> Date::operator-(const Date &d) {
     return round<seconds>(duration);
 }
 
+bool Date::operator<(const Date &d) {
+    return time_ < d.time_;
+}
+
+bool Date::operator>(const Date &d) {
+    return time_ > d.time_;
+}
+
+bool Date::operator<=(const Date &d) {
+    return time_ <= d.time_;
+}
+
+bool Date::operator>=(const Date &d) {
+    return time_ >= d.time_;
+}
+
 year_month_day Date::get_ymd() const {
     auto days = floor<duration<int, std::ratio_multiply<hours::period, std::ratio<24>>>>(time_);
     year_month_day ymd{days};

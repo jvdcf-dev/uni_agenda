@@ -9,6 +9,10 @@ class Date {
         Date(int year, int month, int day, int hour, int minute, int second);
 
         std::chrono::duration<int64_t> operator-(const Date& d);    // Returns the difference in seconds
+        bool operator<(const Date& d);
+        bool operator>(const Date& d);
+        bool operator<=(const Date& d);
+        bool operator>=(const Date& d);
         std::chrono::year_month_day get_ymd() const;
         std::chrono::hh_mm_ss<std::chrono::duration<int64_t>> get_hms() const;
         int get_weekday() const;    // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
