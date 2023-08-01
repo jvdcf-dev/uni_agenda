@@ -30,6 +30,20 @@ void Date_tests() {
     Date d2 = Date(1900, 1, 1, 1, 1, 1);
     assert(d2 - d1 == 3661s);}
 
+    {Date d1 = Date(1900, 1, 1, 0, 0, 0);
+    Date d2 = Date(1900, 1, 1, 1, 1, 1);
+    assert((d1 < d2) == true);
+    assert((d1 > d2) == false);
+    assert((d1 <= d2) == true);
+    assert((d1 >= d2) == false);}
+
+    {Date d1 = Date(2023, 3, 32, 0, 0, 0);
+    Date d2 = Date(2023, 3, 32, 0, 0, 0);
+    assert((d1 < d2) == false);
+    assert((d1 > d2) == false);
+    assert((d1 <= d2) == true);
+    assert((d1 >= d2) == true);}
+
     {Date d = Date(2020, 9, 20, 21, 59, 1);
     auto ymd = d.get_ymd();
     assert(ymd.day() == std::chrono::day(20));
@@ -170,14 +184,63 @@ void assessment_tests() {
 }
 
 
-void task_tests() {}
+void task_tests() {
+    {Task t = Task();
+    assert(t.get_exercises() == "N/A");
+    assert(t.get_starting_date().get_ymd().year() == std::chrono::year(1900));
+    assert(t.get_starting_date().get_ymd().month() == std::chrono::month(1));
+    assert(t.get_starting_date().get_ymd().day() == std::chrono::day(1));
+    assert(t.get_final_date().get_ymd().year() == std::chrono::year(1900));
+    assert(t.get_final_date().get_ymd().month() == std::chrono::month(1));
+    assert(t.get_final_date().get_ymd().day() == std::chrono::day(1));
+    assert(t.get_completed() == false);}
+    
+    {Task t = Task("Test", 2020, 9, 20, 2020, 9, 21, true);
+    assert(t.get_exercises() == "Test");
+    assert(t.get_starting_date().get_ymd().year() == std::chrono::year(2020));
+    assert(t.get_starting_date().get_ymd().month() == std::chrono::month(9));
+    assert(t.get_starting_date().get_ymd().day() == std::chrono::day(20));
+    assert(t.get_final_date().get_ymd().year() == std::chrono::year(2020));
+    assert(t.get_final_date().get_ymd().month() == std::chrono::month(9));
+    assert(t.get_final_date().get_ymd().day() == std::chrono::day(21));
+    assert(t.get_completed() == true);}
+
+    {Task t = Task("Another test", 2020, 11, 23, 2020, 11, 24, false);
+    t.set_exercises("Just a test");
+    t.set_final_date(2022, 12, 27);
+    t.set_starting_date(2022, 12, 26);
+    t.set_completed(true);
+    assert(t.get_exercises() == "Just a test");
+    assert(t.get_starting_date().get_ymd().year() == std::chrono::year(2022));
+    assert(t.get_starting_date().get_ymd().month() == std::chrono::month(12));
+    assert(t.get_starting_date().get_ymd().day() == std::chrono::day(26));
+    assert(t.get_final_date().get_ymd().year() == std::chrono::year(2022));
+    assert(t.get_final_date().get_ymd().month() == std::chrono::month(12));
+    assert(t.get_final_date().get_ymd().day() == std::chrono::day(27));
+    assert(t.get_completed() == true);}
+
+    try {
+        {Task t = Task("", 2020, 1, 1, 2019, 12, 12, false);}
+    } catch (const invalid_argument& e) {}
+
+    try {
+        {Task t = Task();
+        t.set_starting_date(2019, 12, 12);}
+    } catch (const invalid_argument& e) {}
+
+    try {
+        {Task t = Task();
+        t.set_dates(2019, 12, 12, 1995, 12, 28);}
+    } catch (const invalid_argument& e) {}
+}
+
+
 void summary_tests() {}
 void subject_tests() {}
 void semester_tests() {}
 void course_tests() {}
 
-void Temporary() {
-}
+void Temporary() {}
 
 
 int main() {
