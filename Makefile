@@ -1,25 +1,59 @@
+# Project hierarchy:
+# uni_agenda/
+# ├── src/			# Source files (.cpp)
+# |   └── include/  # Headers (.hpp)
+# ├── obj/			# Objects (.o)
+# ├── bin/			# Executables
+# ├── docs/			# Documentation
+# ├── Makefile
+#
+# Classes:
+# Date, Assessment, Time, Task, Summary, Subject, Semester, Course
+
+
+# Project name
+PROJECT = uni_agenda
+
 # Compiler
-COMPILER=g++
+COMPILER = g++
 
-# Flags: Includes c++ version, warnings as errors, debugging info, math library and sanitizers
-FLAGS=-std=c++20 -pedantic -Wall -Wuninitialized -Werror -g -lm -fsanitize=address -fsanitize=undefined
+# Flags: Includes c++ version, warnings as errors, debugging info, math library, sanitizers and optimization
+FLAGS = -std=c++20 -pedantic -Wall -Wuninitialized -Werror -g -lm -fsanitize=address -fsanitize=undefined -O2
 
-# Files and Headers used in all programs
-FILES=Date.cpp Assessment.cpp Time.cpp Task.cpp #Summary.cpp Subject.cpp Semester.cpp Course.cpp
-HEADERS=Date.hpp Assessment.hpp Time.hpp Task.hpp #Summary.hpp Subject.hpp Semester.hpp Course.hpp
+# Directories and files
+FILES = $(wildcard src/*.cpp)
+HEADERS = $(wildcard src/include/*.hpp)
+OBJ_DIR = obj
+BIN_DIR = bin
 
-# Compilated programs
+# Programs to compile
 PROGRAMS=test #TODO
 
+
 # Make actions / arguments
-all: $(PROGRAMS)
+all: date assessment time task test
+	$(COMPILER) $(FLAGS) -flto=thin -o $(OBJ_DIR)/* -o $(PROJECT)
+	strip $(PROJECT)
 
-test: $(HEADERS) $(FILES) test.cpp 
-	$(COMPILER) -o test test.cpp $(FILES) $(FLAGS)
+test:
+	$(COMPILER) $(FLAGS) -c test.cpp -o $(OBJ_DIR)/test.o
 
-clean: rm -fr *.dSYM $(PROGRAMS)
+date:
+	$(COMPILER) $(FLAGS) -c src/Date.cpp -o $(OBJ_DIR)/date.o
 
-# (TODO)
+assessment:
+	$(COMPILER) $(FLAGS) -c src/Assessment.cpp -o $(OBJ_DIR)/assessment.o
 
-# $(PROG): $(FILES) $(HEADERS)
-# 	$(COMPILER) $(FLAGS) $(FILES) -o $(PROG)$(FILES) $(HEADERS) $(COMPILER) $(FLAGS) $(FILES) -o test
+time:
+	$(COMPILER) $(FLAGS) -c src/Time.cpp -o $(OBJ_DIR)/time.o
+
+task:
+	$(COMPILER) $(FLAGS) -c src/Task.cpp -o $(OBJ_DIR)/task.o
+
+
+
+#all: $(PROGRAMS)
+#
+#test: $(HEADERS) $(FILES) test.cpp
+#	$(COMPILER) -o $(BIN_DIR)/test test.cpp $(FILES) $(FLAGS)
+
