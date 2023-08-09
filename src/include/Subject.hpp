@@ -33,12 +33,19 @@ class Subject {
         std::vector<Task>& access_tasks();
         std::vector<Summary>& access_summaries();
 
+        // Time tracking
+        Time& access_time();
+
+        // Calculations
+        float grade() const;
+        // ...
+
     private:
         std::string name_;
         std::string acronym_;
         std::string code_;
         float credits_;
-        Time time_tracked;
+        Time time_tracked_;
         std::vector<Assessment> assessments_;
         std::vector<Task> tasks_;
         std::vector<Summary> summaries_;
