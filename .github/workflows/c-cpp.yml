@@ -15,6 +15,6 @@ jobs:
     - name: Update dependencies
       run: sudo apt-get install --only-upgrade --fix-missing libstdc++6
     - name: Compile unit tests
-      run: make
+      run: make -j2
     - name: Run unit tests
       run: ./bin/test
