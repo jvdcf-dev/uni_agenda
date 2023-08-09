@@ -9,7 +9,7 @@ class Summary {
         Summary(std::string topics, int year, int month, int day, bool reviewed);
 
         std::string get_topics() const;
-        std::chrono::year_month_day get_date() const;
+        Date get_date() const;
         bool get_reviewed() const;
         void set_topics(std::string topics);
         void set_date(int year, int month, int day);
