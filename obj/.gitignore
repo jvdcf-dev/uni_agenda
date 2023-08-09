@@ -3,3 +3,7 @@ date.o
 task.o
 test.o
 time.o
+summary.o
+subject.o
+semester.o
+course.o
