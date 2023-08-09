@@ -1,25 +1,65 @@
+# Project hierarchy:
+# uni_agenda/
+# ├── $(SRC_DIR)/			# Source files (.cpp)
+# |   └── include/  # Headers (.hpp)
+# ├── obj/			# Objects (.o)
+# ├── bin/			# Executables
+# ├── docs/			# Documentation
+# ├── Makefile
+#
+# Classes:
+# Date, Assessment, Time, Task, Summary, Subject, Semester, Course
+
+
+# Project name
+PROJECT = uni_agenda
+
 # Compiler
-COMPILER=g++
+COMPILER = g++
 
-# Flags: Includes c++ version, warnings as errors, debugging info, math library and sanitizers
-FLAGS=-std=c++20 -pedantic -Wall -Wuninitialized -Werror -g -lm -fsanitize=address -fsanitize=undefined
+# Flags: Includes c++ version, warnings as errors, debugging info, math library, sanitizers and optimization
+FLAGS = -std=c++20 -pedantic -Wall -Wuninitialized -Werror -g -lm -fsanitize=address -fsanitize=undefined -O2
 
-# Files and Headers used in all programs
-FILES=Date.cpp Assessment.cpp Time.cpp Task.cpp #Summary.cpp Subject.cpp Semester.cpp Course.cpp
-HEADERS=Date.hpp Assessment.hpp Time.hpp Task.hpp #Summary.hpp Subject.hpp Semester.hpp Course.hpp
+# Directories and files
+SRC_DIR = src
+OBJ_DIR = obj
+BIN_DIR = bin
 
-# Compilated programs
-PROGRAMS=test #TODO
+# Programs to compile
+PROGRAMS = test
 
 # Make actions / arguments
 all: $(PROGRAMS)
 
-test: $(HEADERS) $(FILES) test.cpp 
-	$(COMPILER) -o test test.cpp $(FILES) $(FLAGS)
+test: date assessment time task # summary subject semester course
+	$(COMPILER) $(FLAGS) -c $(SRC_DIR)/test.cpp -o $(OBJ_DIR)/test.o
+	$(COMPILER) $(FLAGS) -flto=thin $(OBJ_DIR)/* -o $(BIN_DIR)/test
 
-clean: rm -fr *.dSYM $(PROGRAMS)
 
-# (TODO)
+date:
+	$(COMPILER) $(FLAGS) -c $(SRC_DIR)/Date.cpp -o $(OBJ_DIR)/date.o
 
-# $(PROG): $(FILES) $(HEADERS)
-# 	$(COMPILER) $(FLAGS) $(FILES) -o $(PROG)$(FILES) $(HEADERS) $(COMPILER) $(FLAGS) $(FILES) -o test
+assessment:
+	$(COMPILER) $(FLAGS) -c $(SRC_DIR)/Assessment.cpp -o $(OBJ_DIR)/assessment.o
+
+time:
+	$(COMPILER) $(FLAGS) -c $(SRC_DIR)/Time.cpp -o $(OBJ_DIR)/time.o
+
+task:
+	$(COMPILER) $(FLAGS) -c $(SRC_DIR)/Task.cpp -o $(OBJ_DIR)/task.o
+
+summary:
+	$(COMPILER) $(FLAGS) -c $(SRC_DIR)/Summary.cpp -o $(OBJ_DIR)/summary.o
+
+subject:
+	$(COMPILER) $(FLAGS) -c $(SRC_DIR)/Subject.cpp -o $(OBJ_DIR)/subject.o
+
+semester:
+	$(COMPILER) $(FLAGS) -c $(SRC_DIR)/Semester.cpp -o $(OBJ_DIR)/semester.o
+
+course:
+	$(COMPILER) $(FLAGS) -c $(SRC_DIR)/Course.cpp -o $(OBJ_DIR)/course.o
+
+
+clean:
+	rm -f $(OBJ_DIR)/*.o $(BIN_DIR)/*

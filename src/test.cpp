@@ -1,11 +1,11 @@
-#include "Date.hpp"
-#include "Time.hpp"
-#include "Assessment.hpp"
-#include "Task.hpp"
-#include "Summary.hpp"
-#include "Subject.hpp"
-#include "Semester.hpp"
-#include "Course.hpp"
+#include "include/Date.hpp"
+#include "include/Time.hpp"
+#include "include/Assessment.hpp"
+#include "include/Task.hpp"
+#include "include/Summary.hpp"
+#include "include/Subject.hpp"
+#include "include/Semester.hpp"
+#include "include/Course.hpp"
 
 #include <iostream>    
 #include <cassert>
