@@ -31,7 +31,7 @@ PROGRAMS = test
 # Make actions / arguments
 all: $(PROGRAMS)
 
-test: date assessment time task # summary subject semester course
+test: date assessment time task summary # subject semester course
 	$(COMPILER) $(FLAGS) -c $(SRC_DIR)/test.cpp -o $(OBJ_DIR)/test.o
 	$(COMPILER) $(FLAGS) -flto=thin $(OBJ_DIR)/* -o $(BIN_DIR)/test
 

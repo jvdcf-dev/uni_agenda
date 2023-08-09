@@ -235,7 +235,33 @@ void task_tests() {
 }
 
 
-void summary_tests() {}
+void summary_tests() {
+    {Summary s = Summary();
+    assert(s.get_topics() == "N/A");
+    assert(s.get_date().get_ymd().year() == std::chrono::year(1900));
+    assert(s.get_date().get_ymd().month() == std::chrono::month(1));
+    assert(s.get_date().get_ymd().day() == std::chrono::day(1));
+    assert(s.get_reviewed() == false);}
+
+    {Summary s = Summary("Test", 2020, 9, 20, true);
+    assert(s.get_topics() == "Test");
+    assert(s.get_date().get_ymd().year() == std::chrono::year(2020));
+    assert(s.get_date().get_ymd().month() == std::chrono::month(9));
+    assert(s.get_date().get_ymd().day() == std::chrono::day(20));
+    assert(s.get_reviewed() == true);}
+
+    {Summary s = Summary("Another test", 2020, 11, 23, false);
+    s.set_topics("Just a test");
+    s.set_date(2022, 12, 27);
+    s.set_reviewed(true);
+    assert(s.get_topics() == "Just a test");
+    assert(s.get_date().get_ymd().year() == std::chrono::year(2022));
+    assert(s.get_date().get_ymd().month() == std::chrono::month(12));
+    assert(s.get_date().get_ymd().day() == std::chrono::day(27));
+    assert(s.get_reviewed() == true);}
+}
+
+
 void subject_tests() {}
 void semester_tests() {}
 void course_tests() {}
