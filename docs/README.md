@@ -1,5 +1,9 @@
 # uni_agenda
 A CLI interface for managing tasks, exams and deadlines in university
+```
+AVISO: Este branch é experimental e não tem todos os testes desenvolvidos!
+Observe os ISSUES para mais informações.
+```
 
 ### Class hierarchy (temp)
 - **Curso**
