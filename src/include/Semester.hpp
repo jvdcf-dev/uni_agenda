@@ -8,7 +8,7 @@
 class Semester {
     public:
         Semester();
-        Semester(int year, int semester, Date starting_date, Date final_date);
+        Semester(int year, int semester, int s_year, int s_month, int s_day, int e_year, int e_month, int e_day);
 
         int get_year() const;
         int get_semester() const;
@@ -17,8 +17,8 @@ class Semester {
 
         void set_year(int year);
         void set_semester(int semester);
-        void set_starting_date(Date starting_date);
-        void set_final_date(Date final_date);
+        void set_starting_date(int year, int month, int day);
+        void set_final_date(int year, int month, int day);
 
         void create_subject(std::string name, std::string acronym, std::string code, float credits);
         std::vector<Subject>& access_subjects();
@@ -27,7 +27,7 @@ class Semester {
         int year_;
         int semester_;
         Date starting_date_;
-        Date final_date;
+        Date final_date_;
         std::vector<Subject> subjects_;
 };
 
