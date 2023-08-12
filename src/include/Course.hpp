@@ -2,6 +2,7 @@
 #define COURSE_H
 #include "Semester.hpp"
 #include <vector>
+#include <string>
 
 class Course {
     public:
@@ -14,6 +15,9 @@ class Course {
         void create_semester(int year, int semester, Date starting_date, Date final_date);
         std::vector<Semester>& access_semesters();
         
+        void save_course(std::string path);
+        void load_course(std::string path);
+
     private:
         std::string name;
         std::vector<Semester> semesters;

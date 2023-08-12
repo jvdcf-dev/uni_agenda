@@ -16,6 +16,8 @@ class Semester {
         Date get_final_date() const;
 
         void set_year(int year);
+        /// @brief 
+        /// @param semester 
         void set_semester(int semester);
         void set_starting_date(Date starting_date);
         void set_final_date(Date final_date);
