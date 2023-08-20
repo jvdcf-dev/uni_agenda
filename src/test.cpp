@@ -6,14 +6,17 @@
 #include "include/Subject.hpp"
 #include "include/Semester.hpp"
 #include "include/Course.hpp"
+#include "include/test.hpp"
 
 #include <iostream>    
 #include <cassert>
 #include <unistd.h>     // sleep() for Unix machines (use <windows.h> for Windows machines)
+#include <stdlib.h>    // used for system()
 #include <stdexcept>
+#include <chrono>
 using namespace std;
 
-void Date_tests() {
+void Test::date_tests() {
     {Date d = Date();
     time_t t = time(0);
     assert(ctime(&t) == d.str());}
@@ -66,7 +69,7 @@ void Date_tests() {
 }
 
 
-void time_tests() {
+void Test::time_tests() {
     {Time t = Time();
     assert(t.get_time() == 0s);
     assert(t.get_hms().hours() == 0h);
@@ -129,7 +132,7 @@ void time_tests() {
 }
 
 
-void assessment_tests() {
+void Test::assessment_tests() {
     {Assessment a = Assessment();
     assert(a.get_name() == "N/A");
     assert(a.get_weight() == 0);
@@ -184,7 +187,7 @@ void assessment_tests() {
 }
 
 
-void task_tests() {
+void Test::task_tests() {
     {Task t = Task();
     assert(t.get_exercises() == "N/A");
     assert(t.get_starting_date().get_ymd().year() == std::chrono::year(1900));
@@ -235,7 +238,7 @@ void task_tests() {
 }
 
 
-void summary_tests() {
+void Test::summary_tests() {
     {Summary s = Summary();
     assert(s.get_topics() == "N/A");
     assert(s.get_date().get_ymd().year() == std::chrono::year(1900));
@@ -262,22 +265,58 @@ void summary_tests() {
 }
 
 
-void subject_tests() {}
-void semester_tests() {}
-void course_tests() {}
+void Test::subject_tests() {}
+void Test::semester_tests() {}
+void Test::course_tests() {}
 
-void Temporary() {}
+void Test::temporary_tests() {}
 
+void Test::all_tests() {
+    system("clear");    // Only valid for Unix machines (use "cls" for Windows)
+    std::chrono::system_clock::time_point start;
+    std::chrono::system_clock::time_point end;
+    cout << "Running 5 unit tests suites...\n";
 
-int main() {
-    Date_tests();
+    cout << "[1] Date tests | ";
+    start = std::chrono::system_clock::now();
+    date_tests();
+    end = std::chrono::system_clock::now();
+    cout << std::chrono::duration_cast<std::chrono::microseconds>(end - start) << '\n';
+
+    cout << "[2] Time tests | ";
+    start = std::chrono::system_clock::now();
     time_tests();
+    end = std::chrono::system_clock::now();
+    cout << std::chrono::duration_cast<std::chrono::seconds>(end - start) << '\n';
+    
+
+    cout << "[3] Assessment tests | ";
+    start = std::chrono::system_clock::now();
     assessment_tests();
+    end = std::chrono::system_clock::now();
+    cout << std::chrono::duration_cast<std::chrono::microseconds>(end - start) << '\n';
+    
+
+    cout << "[4] Task tests | ";
+    start = std::chrono::system_clock::now();
     task_tests();
+    end = std::chrono::system_clock::now();
+    cout << std::chrono::duration_cast<std::chrono::microseconds>(end - start) << '\n';
+    
+
+    cout << "[5] Summary tests | ";
+    start = std::chrono::system_clock::now();
     summary_tests();
-    subject_tests();
+    end = std::chrono::system_clock::now();
+    cout << std::chrono::duration_cast<std::chrono::microseconds>(end - start) << '\n';
+    
+
+    /* subject_tests();
     semester_tests();
-    course_tests();
-    Temporary();
-    return 0;
+    course_tests();*/
+    temporary_tests(); 
+
+    cout << "All implemented classes are approved!\n" << "Execute the program normally to run the interface.\n";
 }
+
+Test::Test() {};

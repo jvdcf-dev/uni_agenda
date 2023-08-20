@@ -9,6 +9,7 @@
 #
 # Classes:
 # Date, Assessment, Time, Task, Summary, Subject, Semester, Course
+# (test is also considered a class, but it is not necessary for the project)
 
 
 # Project name
@@ -25,16 +26,13 @@ SRC_DIR = src
 OBJ_DIR = obj
 BIN_DIR = bin
 
-# Programs to compile
-PROGRAMS = test
-
 # Make actions / arguments
-all: $(PROGRAMS)
+interface: date assessment time task summary subject semester course test
+	$(COMPILER) $(FLAGS) -c $(SRC_DIR)/interface.cpp -o $(OBJ_DIR)/interface.o
+	$(COMPILER) $(FLAGS) -flto=thin $(OBJ_DIR)/* -o $(BIN_DIR)/$(PROJECT)
 
-test: date assessment time task summary subject semester course
+test:
 	$(COMPILER) $(FLAGS) -c $(SRC_DIR)/test.cpp -o $(OBJ_DIR)/test.o
-	$(COMPILER) $(FLAGS) -flto=thin $(OBJ_DIR)/* -o $(BIN_DIR)/test
-
 
 date:
 	$(COMPILER) $(FLAGS) -c $(SRC_DIR)/Date.cpp -o $(OBJ_DIR)/date.o
@@ -59,7 +57,6 @@ semester:
 
 course:
 	$(COMPILER) $(FLAGS) -c $(SRC_DIR)/Course.cpp -o $(OBJ_DIR)/course.o
-
 
 clean:
 	rm -f $(OBJ_DIR)/*.o $(BIN_DIR)/*

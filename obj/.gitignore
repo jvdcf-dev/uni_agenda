@@ -1,7 +1,8 @@
+test.o
+interface.o
 assessment.o
 date.o
 task.o
-test.o
 time.o
 summary.o
 subject.o

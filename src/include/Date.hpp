@@ -20,6 +20,7 @@ class Date {
         void set_hms(int hour, int minute, int second); 
 
         std::string str() const;    // Returns a string in the format "Week Mon Day HH:MM:SS Year\n"
+        std::string print_date() const;    // Returns a string in the format "Day/Mon/Year"
 
     private:
         std::chrono::system_clock::time_point time_;

@@ -2,6 +2,7 @@
 #include "include/Semester.hpp"
 #include <vector>
 #include <string>
+#include <sstream>
 using namespace std;
 
 Course::Course() {
@@ -30,7 +31,7 @@ std::vector<Semester>& Course::access_semesters() {
 }
 
 void Course::save_course(std::string path) {
-    // TODO
+    
 }
 
 void Course::load_course(std::string path) {

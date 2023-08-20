@@ -17,4 +17,4 @@ jobs:
     - name: Compile unit tests
       run: make -j2
     - name: Run unit tests
-      run: ./bin/test
+      run: ./bin/uni_agenda debug

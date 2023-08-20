@@ -2,6 +2,7 @@
 #include <chrono>
 #include <sstream>
 #include <stdexcept>
+#include <string>
 using namespace std::chrono;
 
 Date::Date() {
@@ -76,4 +77,11 @@ hh_mm_ss<duration<int64_t>> Date::get_hms() const {
 std::string Date::str() const {
     time_t time_point = system_clock::to_time_t(time_);
     return ctime(&time_point);
+}
+std::string Date::print_date() const {
+    time_t time_t = system_clock::to_time_t(time_);
+    std::tm tm = *std::localtime(&time_t);
+    std::ostringstream oss;
+    oss << tm.tm_mday << '/' << tm.tm_mon + 1 << '/' << tm.tm_year + 1900;
+    return oss.str();
 }
