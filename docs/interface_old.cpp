@@ -14,11 +14,73 @@ using namespace std;
 
 
 // Create or load
-void new_assessment(Subject& s) {}
+void new_assessment(Subject& s) {
+    system("clear");
+    tabulate::Table menu;
+    menu.add_row({"New assessment"});
+    cout << menu << '\n';
 
-void new_task(Subject& s) {}
+    string name;
+    float weight, grade;
+    unsigned year, month, day;
+    cout << "Name: ";
+    cin >> name;
+    cout << "Weight: ";
+    cin >> weight;
+    cout << "Date (Year): ";
+    cin >> year;
+    cout << "Date (Month): ";
+    cin >> month;
+    cout << "Date (Day): ";
+    cin >> day;
+    cout << "Grade (0 if not graded yet): ";
+    cin >> grade;
+    s.create_assessment(name, weight, year, month, day, grade);
+}
 
-void new_summary(Subject& s) {}
+void new_task(Subject& s) {
+    system("clear");
+    tabulate::Table menu;
+    menu.add_row({"New task"});
+    cout << menu << '\n';
+
+    string exercises;
+    unsigned s_year, s_month, s_day, e_year, e_month, e_day;
+    cout << "List of exercises: ";
+    cin >> exercises;
+    cout << "Starting date (Year): ";
+    cin >> s_year;
+    cout << "Starting date (Month): ";
+    cin >> s_month;
+    cout << "Starting date (Day): ";
+    cin >> s_day;
+    cout << "Ending date (Year): ";
+    cin >> e_year;
+    cout << "Ending date (Month): ";
+    cin >> e_month;
+    cout << "Ending date (Day): ";
+    cin >> e_day;
+    s.create_task(exercises, s_year, s_month, s_day, e_year, e_month, e_day, false);
+}
+
+void new_summary(Subject& s) {
+    system("clear");
+    tabulate::Table menu;
+    menu.add_row({"New summary"});
+    cout << menu << '\n';
+
+    string topics;
+    unsigned year, month, day;
+    cout << "Topics: ";
+    cin >> topics;
+    cout << "Date (Year): ";
+    cin >> year;
+    cout << "Date (Month): ";
+    cin >> month;
+    cout << "Date (Day): ";
+    cin >> day;
+    s.create_summary(topics, year, month, day, false);
+}
 
 void new_subject(Semester& s) {
     system("clear");
@@ -83,7 +145,12 @@ Course load_course() {
 
 
 // Views
-void view_time(Subject& s) {}
+void view_time(Subject& s) {
+    system("clear");
+    tabulate::Table menu;
+    menu.add_row({s.get_name() + "\\ Time tracked"});
+    
+}
 
 void view_assessments(Subject& s) {}
 

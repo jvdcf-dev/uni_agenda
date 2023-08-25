@@ -1,0 +1,48 @@
+// Course file for uni_agenda
+// Updated in: 20/8/2023
+name: L.EIC
+Semester:
+    - year: 1
+    - semester: 1
+    - starting_date: 20/9/2022
+    - ending_date: 20/1/2023
+    - Subject:
+        - name: Programação
+        - acronym: Prog
+        - code: LEIC.009
+        - credits: 6
+        - Time:
+            time_tracked: 0
+
+        - Assessment:
+            - name: test
+            - weight: 0.5
+            - date: 20/10/2022
+            - grade: 16.4
+
+        - Assessment: 
+            //
+        
+        - Task:
+            - exercises: Exercício 4 e 5 da ficha 5
+            - starting_date: 20/10/2022
+            - final_date: 25/10/2022
+            - completed: 0
+        
+        - Task:
+            //
+        
+        - Summary:
+            - topics: Objected oriented programming
+            - date: 23/10/2022
+            - reviewed: 1
+        
+        - Summary:
+            //
+        
+
+    - Subject:
+        //
+
+Semester:
+    //

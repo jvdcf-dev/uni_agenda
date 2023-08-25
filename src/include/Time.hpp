@@ -2,6 +2,7 @@
 #define TIME_H
 #include "Date.hpp"
 #include <chrono>
+#include <string>
 
 class Time {
     public:
@@ -17,6 +18,7 @@ class Time {
         std::chrono::hh_mm_ss<std::chrono::duration<int64_t>> get_hms() const;
         bool is_running() const;
         void set_time(int hours, int minutes, int seconds);
+        std::string str() const;    // returns a string in the format HH:MM:SS
 
     private:
         Date starting_date_;

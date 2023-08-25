@@ -1,6 +1,7 @@
 #include "include/Time.hpp"
 #include <stdexcept>
 #include <chrono>
+#include <string>
 using namespace std::chrono;
 
 Time::Time() {
@@ -53,4 +54,8 @@ bool Time::is_running() const {
 
 void Time::set_time(int hours, int minutes, int seconds) {
     time_tracked_ = duration<int64_t>(hours * 3600 + minutes * 60 + seconds);
+}
+
+std::string Time::str() const {
+    int hours = get_hms().hours().count();
 }
