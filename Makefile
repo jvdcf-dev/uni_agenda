@@ -27,9 +27,11 @@ OBJ_DIR = obj
 BIN_DIR = bin
 
 # Make actions / arguments
-interface: date assessment time task summary subject semester course test
-	$(COMPILER) $(FLAGS) -c $(SRC_DIR)/interface.cpp -o $(OBJ_DIR)/interface.o
-	$(COMPILER) $(FLAGS) -flto=thin $(OBJ_DIR)/* -o $(BIN_DIR)/$(PROJECT)
+
+# -lnurses: Link library used for the CLI interface
+all: date assessment time task summary subject semester course test
+	$(COMPILER) $(FLAGS) -lncurses -c $(SRC_DIR)/interface.cpp -o $(OBJ_DIR)/interface.o
+	$(COMPILER) $(FLAGS) -lncurses -flto=thin $(OBJ_DIR)/* -o $(BIN_DIR)/$(PROJECT)
 
 test:
 	$(COMPILER) $(FLAGS) -c $(SRC_DIR)/test.cpp -o $(OBJ_DIR)/test.o

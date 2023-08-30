@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <chrono>
 #include <string>
+#include <sstream>
 using namespace std::chrono;
 
 Time::Time() {
@@ -58,4 +59,9 @@ void Time::set_time(int hours, int minutes, int seconds) {
 
 std::string Time::str() const {
     int hours = get_hms().hours().count();
+    int minutes = get_hms().minutes().count();
+    int seconds = get_hms().seconds().count();
+    std::ostringstream oss;
+    oss << hours << ':' << minutes << ':' << seconds;
+    return oss.str();
 }
